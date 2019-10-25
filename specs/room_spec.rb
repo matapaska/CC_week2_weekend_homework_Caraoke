@@ -2,6 +2,7 @@ require('minitest/autorun')
 require('minitest/rg')
 require_relative('../room')
 require_relative('../song')
+require_relative('../guest')
 require('pry-byebug')
 
 class RoomTest < MiniTest::Test
@@ -21,6 +22,9 @@ class RoomTest < MiniTest::Test
     @room1 = Room.new("blue", 4, 50, 0, @song_collection, @playlist1, 4)
     @room2 = Room.new("green", 6, 80, 0, @song_collection, @playlist2, 5)
 
+    @guest1 = Guest.new("Mouse", 100, "@song1")
+    @guest2 = Guest.new("Cat", 60, "@song4")
+    @guest3 = Guest.new("Cat", 120, "@song6")
   end
 
   def test_room_get_name
@@ -43,8 +47,8 @@ class RoomTest < MiniTest::Test
     assert_equal(3, @room1.count_songs_in_playlist())
   end
 
-  def test_add_song
-    assert_equal(4, @room1.add_song(@song4))
+  def test_add_song_to_playlist
+    assert_equal(4, @room1.add_song_to_playlist(@song4))
   end
 
   def test_add_money_to_till
@@ -53,7 +57,11 @@ class RoomTest < MiniTest::Test
   end
 
   def test_add_people
-    assert_equal(1, @room1.add_people)
+    assert_equal(5, @room1.add_people)
+  end
+
+  def test_remove_people
+    assert_equal(3, @room1.remove_people)
   end
 
   def test_check_spaces_in_room__enough

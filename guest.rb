@@ -9,13 +9,28 @@ class Guest
 
   end
 
+  def remove_money (amount)
+    @wallet -= amount
+  end
+
   def check_funds(room)
-    if @wallet >= room.price
-      return true
+    return @wallet >= room.price
+  end
+
+  def check_in(room)
+    if check_funds(room) && room.check_spaces_in_room
+      room.add_people
+      room.add_money_to_till(room.price)
+      remove_money(room.price)
+      return "Welcome"
     else
-      return false
+      return "Try again later"
     end
   end
+
+  # def check_out(room, name)
+  #   room.remove_people(name)
+  # end
 
 
 

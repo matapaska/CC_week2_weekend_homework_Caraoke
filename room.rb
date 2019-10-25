@@ -9,7 +9,7 @@ class Room
     @till = till
     @song_collection = song_collection
     @playlist = playlist
-    @number_of_people_in = 0
+    @number_of_people_in = number_of_people_in
   end
 
   def count_songs_in_collection
@@ -20,7 +20,7 @@ class Room
     return @playlist.length()
   end
 
-  def add_song(song)
+  def add_song_to_playlist(song)
     @playlist.push(song)
     count_songs_in_playlist
   end
@@ -33,12 +33,12 @@ class Room
     @number_of_people_in += 1
   end
 
+  def remove_people
+    @number_of_people_in -= 1
+  end
+
   def check_spaces_in_room
-    if @number_of_people_in < @capacity
-      return true
-    elsif @number_of_people_in = @capacity
-      return false
-    end
+    return @number_of_people_in < @capacity
   end
 
 
