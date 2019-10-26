@@ -34,12 +34,27 @@ class Room
   end
 
   def remove_people
-    @number_of_people_in -= 1
+    if @number_of_people_in > 0
+         @number_of_people_in -= 1
+    else
+      return "No one left"
+    end
   end
 
   def check_spaces_in_room
     return @number_of_people_in < @capacity
   end
+
+  def find_favourite_song(title)
+  for song in @song_collection
+    if song.name == title
+      @playslist.push(song.name)
+      return "Song added"
+    else
+      return "Sorry, we don't have this song"
+    end
+  end
+end
 
 
 end

@@ -18,9 +18,11 @@ class RoomTest < MiniTest::Test
     @song_collection = [@song1, @song2, @song3, @song4, @song5]
     @playlist1 = [@song1, @song2, @song3]
     @playlist2 = [@song4, @song5]
+    @playlist3 = [@song5]
 
     @room1 = Room.new("blue", 4, 50, 0, @song_collection, @playlist1, 4)
     @room2 = Room.new("green", 6, 80, 0, @song_collection, @playlist2, 5)
+    @room3 = Room.new("green", 6, 80, 0, @song_collection, @playlist3, 0)
 
     @guest1 = Guest.new("Mouse", 100, "@song1")
     @guest2 = Guest.new("Cat", 60, "@song4")
@@ -64,6 +66,10 @@ class RoomTest < MiniTest::Test
     assert_equal(3, @room1.remove_people)
   end
 
+  def test_remove_people__0
+    assert_equal("No one left", @room3.remove_people)
+  end
+
   def test_check_spaces_in_room__enough
     result = @room2.check_spaces_in_room
     assert(result)
@@ -72,6 +78,18 @@ class RoomTest < MiniTest::Test
   def test_check_spaces_in_room__full
     result = @room1.check_spaces_in_room
     refute(result)
+  end
+
+  def test_find_favourite_song
+    title = @guest1.favourite_song
+    p title
+    result = @room3.find_favourite_song(title)
+    assert_equal("Song added", result)
+  end
+
+  def test_find_favourite_song__not_in_collection
+    result = @room3.find_favourite_song(@guest3.favourite_song)
+    assert_equal("Sorry, we don't have this song", result)
   end
 
 

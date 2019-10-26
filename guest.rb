@@ -28,9 +28,9 @@ class Guest
     end
   end
 
-  # def check_out(room, name)
-  #   room.remove_people(name)
-  # end
+  def check_out(room)
+    room.remove_people
+  end
 
 
 

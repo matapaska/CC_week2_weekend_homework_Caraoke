@@ -57,15 +57,6 @@ class GuestTest < MiniTest::Test
     refute(result)
   end
 
-  @room1 = Room.new("blue", 4, 50, 0, @song_collection, @playlist1, 4)
-  @room2 = Room.new("green", 6, 80, 0, @song_collection, @playlist2, 2)
-
-
-  @guest1 = Guest.new("Mouse", 100, "@song1")
-  @guest2 = Guest.new("Cat", 60, "@song4")
-  @guest3 = Guest.new("Owl", 120, "@song6")
-  @guest4 = Guest.new("Lion", 30, "@song2")
-
   def test_check_in__enouh_funds_enough_space
     result = @guest3.check_in(@room2)
     assert_equal(3, @room2.number_of_people_in)
@@ -98,8 +89,10 @@ class GuestTest < MiniTest::Test
     assert_equal("Try again later", result)
   end
 
-  # def test_check_out
-  #   check_out()
-  # assert_equal()
-  # end
+  def test_check_out
+    @guest1.check_out(@room1)
+    assert_equal(3, @room1.number_of_people_in)
+  end
+
+  
 end
