@@ -46,15 +46,15 @@ class Room
   end
 
   def find_favourite_song(title)
-  for song in @song_collection
-    if song.name == title
-      @playslist.push(song.name)
-      return "Song added"
-    else
-      return "Sorry, we don't have this song"
+    for song in @song_collection
+      if !@playlist.include?(song) && song.name == title 
+        add_song_to_playlist(song)
+        return "Song added"
+      else
+        return "Sorry, we don't have this song"
+      end
     end
   end
-end
 
 
 end

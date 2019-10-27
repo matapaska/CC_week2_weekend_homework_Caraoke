@@ -81,16 +81,17 @@ class RoomTest < MiniTest::Test
   end
 
   def test_find_favourite_song
-    title = @guest1.favourite_song
-    p title
-    result = @room3.find_favourite_song(title)
+    # title = @guest1.favourite_song.name
+    # p title
+    # result = @room3.find_favourite_song(title)
+    result = @room3.find_favourite_song("title1")
     assert_equal("Song added", result)
   end
 
   def test_find_favourite_song__not_in_collection
-    result = @room3.find_favourite_song(@guest3.favourite_song)
+    result = @room3.find_favourite_song("title6")
     assert_equal("Sorry, we don't have this song", result)
   end
 
 
-end
+  end

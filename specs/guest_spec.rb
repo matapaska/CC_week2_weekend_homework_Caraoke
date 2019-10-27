@@ -94,5 +94,7 @@ class GuestTest < MiniTest::Test
     assert_equal(3, @room1.number_of_people_in)
   end
 
-  
+
+
+
 end
